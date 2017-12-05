@@ -1,17 +1,13 @@
 <?php
 
 require 'db_connect.php';
-if (isset($_GET['id']) && isset($_GET['comments'])) {
+if (isset($_GET['id']) && isset($_GET['username']) && isset($_GET['comments'])) {
     $id = ($_GET['id']);
+    $username = ($_GET['username']);
     $comments = ($_GET['comments']);
-    $comments .= " anotheRcommenT ";
-    $stmt = $conn->prepare("SELECT comments FROM marker_data WHERE id = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
-    $comments .= $data['comments'];
-    $sql = $conn->prepare("UPDATE marker_data SET comments = :comments WHERE id = :id");
+    $sql = $conn->prepare("INSERT INTO comments_data(id, username, comments) VALUES(:id, :username, :comments)");
     $sql->bindParam(":id", $id);
+    $sql->bindParam(":username", $username);
     $sql->bindParam(":comments", $comments);
     $row = $sql->execute();
     if ($row < 1) {
