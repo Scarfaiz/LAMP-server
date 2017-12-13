@@ -14,17 +14,17 @@ if (isset($_GET['latitude']) && isset($_GET['longitude']) && isset($_GET['city']
     $i = 0;
 	while($row = $sql->fetch(PDO::FETCH_ASSOC))
                 {
-			 $stmt = $conn->prepare("SELECT latitude, longitude FROM marker_data WHERE id = :id;");
+			 $stmt = $conn->prepare("SELECT confirmation_status, latitude, longitude FROM marker_data WHERE id = :id;");
     			$stmt->bindParam(":id", $row["id"]);
     			$stmt->execute();
 			$geodata  = $stmt->fetch(PDO::FETCH_ASSOC);
 			$data["latitude"] .= $geodata["latitude"];
 			$data["longitude"] .= $geodata["longitude"];
-                        //echo json_encode($row);
+                        $data["confirmation_status"] .= $geodata["confirmation_status"];
 			$data["id"] .= $row["id"];
-			$i .= 1;
 			$data["latitude"] .= " ";
                         $data["longitude"] .= " ";
+			$data["confirmation_status"] .= " ";
                         //echo json_encode($row);
                         $data["id"] .= " ";
              }

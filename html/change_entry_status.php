@@ -23,7 +23,7 @@ if (isset($_GET['id']) && isset($_GET['username']) && isset($_GET['confirmation_
     	$stmt->bindParam(":confirmation_status", $confirmation_status);
 	$data = $stmt->execute();
 	if ($data > 0) {
-	$sql = $conn->prepare("UPDATE account_data SET reputation = reputation + 40, coins = coins + 1  WHERE username = :username;");
+	$sql = $conn->prepare("UPDATE account_data SET reputation = reputation + 40, coins = coins - 1  WHERE username = :username;");
         $sql->bindParam(":username", $username);
         $sql->execute();
         $error['success'] = 1; //Success is for easier handling on Android to know what to do next
