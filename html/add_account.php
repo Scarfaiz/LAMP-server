@@ -28,7 +28,7 @@
 						if(isset($_GET['password']))
 						{
 						$password = $_GET['password'];
-                                        	$stmt = $conn -> prepare("INSERT INTO account_data(email, username, password, reputation) VALUES(:email, :username, :password, 0)");
+                                        	$stmt = $conn -> prepare("INSERT INTO account_data(email, username, password, reputation, coins) VALUES(:email, :username, :password, 0, 3)");
 						$stmt->bindParam(":email", $email);
                                         	$stmt->bindParam(":username", $username);
 						$stmt->bindParam(":password", $password);
